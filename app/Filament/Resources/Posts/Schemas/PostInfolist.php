@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources\Posts\Schemas;
 
+use Dom\Text;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
+use Filament\Tables\Columns\ImageColumn;
 
 class PostInfolist
 {

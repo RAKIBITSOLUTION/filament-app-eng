@@ -2,10 +2,17 @@
 
 namespace App\Filament\Resources\Posts\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\MarkdownEditor;
 
 class PostForm
 {
@@ -13,21 +20,14 @@ class PostForm
     {
         return $schema
             ->components([
-                TextInput::make('thumbnail'),
-                TextInput::make('title')
-                    ->required(),
-                TextInput::make('color')
-                    ->required(),
-                TextInput::make('slug')
-                    ->required(),
-                TextInput::make('category_id')
-                    ->required()
-                    ->numeric(),
-                Textarea::make('content')
-                    ->columnSpanFull(),
-                TextInput::make('tags'),
-                Toggle::make('is_published')
-                    ->required(),
+                TextInput::make('title')->required(),
+                TextInput::make('slug')->required(),
+                MarkdownEditor::make('content')->required(),
+                FileUpload::make('thumbnail')->disk('public')->directory('thumbnails'),
+                ColorPicker::make('color')->required(),
+                Select::make('category_id')->relationship('category', 'name')->required(),
+                TagsInput::make('tags')->required(),
+                Checkbox::make('is_published')->required(),
             ]);
     }
 }

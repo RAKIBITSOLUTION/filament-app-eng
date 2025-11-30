@@ -6,9 +6,13 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Nette\Utils\ImageColor;
 
 class PostsTable
 {
@@ -16,19 +20,17 @@ class PostsTable
     {
         return $table
             ->columns([
-                TextColumn::make('thumbnail')
-                    ->searchable(),
+                ImageColumn::make('thumbnail'),
                 TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('color')
+                ColorColumn::make('color')
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                TextColumn::make('category_id')
+                TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
-                IconColumn::make('is_published')
-                    ->boolean(),
+                CheckboxColumn::make('is_published'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

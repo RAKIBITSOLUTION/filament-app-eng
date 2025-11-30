@@ -3,10 +3,12 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use Dom\Text;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use League\Flysystem\Visibility;
 
 class UserForm
 {
@@ -14,17 +16,13 @@ class UserForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required(),
+               TextInput::make('name')
+                   ->required(),
                 TextInput::make('email')
-                    ->label('Email address')
-                    ->email()
-                    ->required(),
-                DateTimePicker::make('email_verified_at'),
+                ->email(),
                 TextInput::make('password')
-                    ->password()
-                    ->required(),
-                TextInput::make('remember_token'),
+                ->password()
+                ->visibleOn('create'),
             ]);
     }
 }

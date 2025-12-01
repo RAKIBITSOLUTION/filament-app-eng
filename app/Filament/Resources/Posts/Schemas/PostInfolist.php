@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Posts\Schemas;
 use Dom\Text;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Image;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\ImageColumn;
 
@@ -14,7 +15,7 @@ class PostInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('thumbnail'),
+                ImageColumn::make('thumbnail'),
                 TextEntry::make('title'),
                 TextEntry::make('color'),
                 TextEntry::make('slug'),

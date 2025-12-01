@@ -8,11 +8,9 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\ColorColumn;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Nette\Utils\ImageColor;
 
 class PostsTable
 {
@@ -20,7 +18,7 @@ class PostsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('thumbnail'),
+                ImageColumn::make('thumbnail')->circular(),
                 TextColumn::make('title')
                     ->searchable(),
                 ColorColumn::make('color')

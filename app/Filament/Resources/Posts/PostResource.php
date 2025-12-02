@@ -36,6 +36,8 @@ class PostResource extends Resource
 
     public static function table(Table $table): Table
     {
+        
+
         return PostsTable::configure($table);
     }
 

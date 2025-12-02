@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Posts\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -18,21 +19,21 @@ class PostsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('thumbnail')->circular(),
+                ImageColumn::make('thumbnail'),
                 TextColumn::make('title')
-                    ->searchable(),
-                ColorColumn::make('color')
-                    ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
-                TextColumn::make('category.name')
+                    ->searchable()
+                    ->sortable(),
+                ColorColumn::make('color'),
+                TextColumn::make('slug'),
+                TextColumn::make('category.slug')
                     ->numeric()
                     ->sortable(),
                 CheckboxColumn::make('is_published'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->label('Published on'),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -44,6 +45,7 @@ class PostsTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

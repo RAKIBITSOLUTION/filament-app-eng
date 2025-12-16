@@ -2,9 +2,12 @@
 
 namespace App\Filament\Resources\Users\Pages;
 
-use App\Filament\Resources\Users\UserResource;
+use PHPUnit\Metadata\Test;
 use Filament\Actions\CreateAction;
+use App\Filament\Widgets\TestChartWidget;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\Users\UserResource;
+use App\Filament\Widgets\TestWidget;
 
 class ListUsers extends ListRecords
 {
@@ -14,6 +17,19 @@ class ListUsers extends ListRecords
     {
         return [
             CreateAction::make(),
+        ];
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            TestWidget::class
+
+        ];
+    }
+    protected function getFooterWidgets(): array
+    {
+        return [
+            TestChartWidget::class
         ];
     }
 }

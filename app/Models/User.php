@@ -15,9 +15,10 @@ class User extends Authenticatable implements FilamentUser
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-        public function canAccessPanel(Panel $panel): bool{
-            return true; //$this->email==='rakibitsolution@gmail.com';
-        }
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true; //$this->email==='rakibitsolution@gmail.com';
+    }
 
 
     /**
@@ -67,5 +68,11 @@ class User extends Authenticatable implements FilamentUser
     public function isReader(): bool
     {
         return $this->role === 'reader';
+    }
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

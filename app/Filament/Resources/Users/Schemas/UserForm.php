@@ -20,6 +20,14 @@ class UserForm
                    ->required(),
                 TextInput::make('email')
                 ->email(),
+                Select::make('role')
+                ->options([
+                    'admin' => 'Admin',
+                    'editor' => 'Editor',
+                    'reader' => 'Reader',
+                ])
+                    ->required(),
+
                 TextInput::make('password')
                 ->password()
                 ->visibleOn('create'),

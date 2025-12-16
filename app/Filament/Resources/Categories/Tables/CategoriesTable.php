@@ -17,8 +17,10 @@ class CategoriesTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                ->label('Category Name')
                     ->searchable(),
                 TextColumn::make('slug')
+                    ->label('Category Slug')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

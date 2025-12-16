@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Posts\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Group;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
@@ -22,34 +23,36 @@ class PostForm
     {
         return $schema
             ->components([
-                Section::make('create a post')->description('Create a new blog post')->collapsible()->schema([
-                    Group::make()->schema([
-                        TextInput::make('title')->rules('min:5|max:10')->required(),
-                        TextInput::make('slug')->required(),
-                        TagsInput::make('tags')->required(),
-                    ])->columns(2),
-                ]),
-
-                Section::make('create a post')->description('Create a new blog post')->collapsible()->schema([
-                    ColorPicker::make('color')->required(),
-                    Select::make('category_id')->relationship('category', 'name')->required(),
-                    Checkbox::make('is_published')->required(),
-                ]),
-
-
-                Group::make()->schema([
-                    Section::make('Post Content')->description('Write the content of the post and upload a thumbnail image')->collapsible()->schema([
-                        MarkdownEditor::make('content')->required(),
-                        FileUpload::make('thumbnail'),
+                Tabs::make('Post Details')
+                    ->tabs([
+                        Tabs\Tab::make('General')
+                            ->components([
+                                TextInput::make('title')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('slug')
+                                    ->required()
+                                    ->maxLength(255),
+                                Select::make('category_id')
+                                    ->relationship('category', 'name')
+                                    ->required(),
+                                ColorPicker::make('color'),
+                                Checkbox::make('is_published')
+                                    ->label('Published'),
+                            ]),
+                        Tabs\Tab::make('Content')
+                            ->components([
+                                MarkdownEditor::make('content')
+                                    ->required(),
+                                TagsInput::make('tags'),
+                            ]),
+                        Tabs\Tab::make('Media')
+                            ->components([
+                                FileUpload::make('thumbnail')
+                                    ->image()
+                                    ->maxSize(1024),
+                            ]),
                     ]),
-                ]),
-
-            ])->columns([
-                'sm' => 1,
-                'md' => 2,
-                'lg' => 2,
-                'xl' => 3,
-                '2xl' => 3,
             ]);
     }
 }

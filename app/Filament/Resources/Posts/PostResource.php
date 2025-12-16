@@ -11,16 +11,28 @@ use App\Filament\Resources\Posts\Schemas\PostInfolist;
 use App\Filament\Resources\Posts\Tables\PostsTable;
 use App\Models\Post;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Filament\Navigation\NavigationGroup;
+
 
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
+
+    protected static ?string $navigationLabel = 'Post';
+
+    protected static string | UnitEnum | null $navigationGroup = 'Settings';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationParentItem = 'Categories';
+
 
     protected static ?string $recordTitleAttribute = 'Post List';
 
@@ -36,7 +48,6 @@ class PostResource extends Resource
 
     public static function table(Table $table): Table
     {
-        
 
         return PostsTable::configure($table);
     }
